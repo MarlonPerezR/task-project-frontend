@@ -30,7 +30,7 @@ Task Manager Pro is a comprehensive task management application that helps users
 
 ## Project Structure
 
-´´´
+```
 src/
 ├── components/
 │   ├── CalendarView.js
@@ -55,7 +55,7 @@ src/
 package-lock.json
 package.json
 README.md
-´´´
+```
 
 
 ## Who Is This System For?
