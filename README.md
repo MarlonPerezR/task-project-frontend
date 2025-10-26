@@ -27,6 +27,8 @@ Task Manager Pro is a comprehensive task management application that helps users
 - H2 Database
 - JPA/Hibernate
 - Maven
+  
+⚠️ Note: To make the project work correctly, you also need to run the backend available here: 
 
 ## Project Structure
 
