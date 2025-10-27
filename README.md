@@ -6,6 +6,9 @@ Task Manager Pro is a comprehensive task management application that helps users
 ## Demo Video
 *[Add your demo video link here]*
 
+## Deployed
+This application is deployed on Vercel and is live for testing and demonstration purposes. The frontend is hosted on Vercel's global CDN for optimal performance and can be accessed via the deployed URL: https://task-project-frontend-fawn.vercel.app/
+
 ## Key Features
 - **Calendar View** - Visual task management with color-coded due dates and status indicators
 - **Smart Filtering** - Filter tasks by completion status, priority levels, and due dates
@@ -31,7 +34,6 @@ Task Manager Pro is a comprehensive task management application that helps users
 ⚠️ Note: To make the project work correctly, you also need to run the backend available here: 
 
 ## Project Structure
-
 ```
 src/
 ├── components/
