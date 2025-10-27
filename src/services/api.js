@@ -1,41 +1,52 @@
-// Configuración EXPLÍCITA para producción y desarrollo
+
 const getApiBaseUrl = () => {
-  // SIEMPRE usar Render en producción (Vercel)
-  if (window.location.hostname === 'task-project-frontend-fawn.vercel.app') {
+
+  if (window.location.hostname.includes('vercel.app')) {
     return 'https://task-project-backend-35fp.onrender.com/api';
   }
   
-  // Para localhost usar backend local
+ 
   if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
     return 'http://localhost:8080/api';
   }
   
-  // Por defecto, usar Render (para cualquier otro caso)
+
   return 'https://task-project-backend-35fp.onrender.com/api';
 };
 
 const API_BASE_URL = getApiBaseUrl();
 
-// Manejo centralizado de errores HTTP
+const getDefaultHeaders = () => ({
+  'Content-Type': 'application/json',
+});
+
 const handleResponse = async (response) => {
   if (!response.ok) {
     const errorText = await response.text();
-    throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+    console.error(`HTTP Error ${response.status}:`, errorText);
+    throw new Error(`Error ${response.status}: ${errorText || 'Request failed'}`);
   }
+
+  if (response.status === 204) {
+    return null;
+  }
+  
   return await response.json();
 };
 
 export const taskService = {
   // Básicos
   getAllTasks: async () => {
-    const response = await fetch(`${API_BASE_URL}/tasks`);
+    const response = await fetch(`${API_BASE_URL}/tasks`, {
+      headers: getDefaultHeaders(),
+    });
     return await handleResponse(response);
   },
 
   createTask: async (task) => {
     const response = await fetch(`${API_BASE_URL}/tasks`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getDefaultHeaders(),
       body: JSON.stringify(task),
     });
     return await handleResponse(response);
