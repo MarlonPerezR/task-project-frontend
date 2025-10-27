@@ -10,7 +10,7 @@ const getApiBaseUrl = () => {
     return 'http://localhost:8080/api';
   }
   
-  // Por defecto, usar Render (para cualquier otro caso incluyendo preview deployments)
+  // Por defecto, usar Render (para cualquier otro caso)
   return 'https://task-project-backend-35fp.onrender.com/api';
 };
 
