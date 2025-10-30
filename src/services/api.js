@@ -1,7 +1,11 @@
+// ELIMINA esta línea:
+// const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://task-project-backend-35fp.onrender.com/api';
+
+// Y deja solo esta función:
 const getApiBaseUrl = () => {
-  // SIEMPRE usar Render en producción (Vercel)
-  if (window.location.hostname.includes('vercel.app')) {
-    return 'https://task-project-backend-35fp.onrender.com/api';
+  // Usar variable de entorno si existe
+  if (process.env.REACT_APP_API_URL) {
+    return process.env.REACT_APP_API_URL;
   }
   
   // Para localhost usar backend local
@@ -9,11 +13,13 @@ const getApiBaseUrl = () => {
     return 'http://localhost:8080/api';
   }
   
-  // Por defecto, usar Render (para cualquier otro caso)
+  // Por defecto, usar Render
   return 'https://task-project-backend-35fp.onrender.com/api';
 };
 
-const API_BASE_URL = getApiBaseUrl();
+const API_BASE_URL = getApiBaseUrl(); // ✅ Solo UNA declaración
+
+console.log('API Base URL:', API_BASE_URL);
 
 // Headers comunes para todas las requests
 const getDefaultHeaders = () => ({
@@ -68,11 +74,7 @@ export const taskService = {
       method: 'DELETE',
       headers: getDefaultHeaders(),
     });
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
-    }
-    return response.ok;
+    return await handleResponse(response); // Simplificado
   },
 
   // Nuevos métodos
